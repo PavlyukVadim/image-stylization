@@ -56,8 +56,11 @@ class Try extends Component {
 
     fetch(url, sentData)
       .then((response) => {
-        console.log('response', response)
         finishLoading()
+        return response.json()
+      })
+      .then((json) => {
+        console.log('json', json)
       })
       .catch((err) => {
         console.log('err', err)
