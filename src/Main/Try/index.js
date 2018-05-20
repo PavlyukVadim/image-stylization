@@ -36,21 +36,32 @@ class Try extends Component {
       pictures: this.state.pictures.concat(picture),
     })
 
+    const header = new Headers({
+      'Access-Control-Allow-Origin':'*',
+      'Content-Type': 'multipart/form-data'
+    })
+
     const file = picture[0]
     const formData = new FormData()
     formData.append('original_file', file, file.name)
     formData.append('style', activeStyle);
 
-    fetch(url, {
-      method: 'POST',
-      body: formData,
-    }).then(function (response) {
-      console.log('response', response)
-      finishLoading()
-    }).catch((err) => {
-      console.log('err', err)
-      finishLoading()
-    })
+    const sentData = {
+      method: POST,
+      mode: 'cors',
+      header: header,
+      body: formData || '',
+    }
+
+    fetch(url, sentData)
+      .then((response) => {
+        console.log('response', response)
+        finishLoading()
+      })
+      .catch((err) => {
+        console.log('err', err)
+        finishLoading()
+      })
   }
 
   render() {
