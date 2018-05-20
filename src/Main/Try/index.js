@@ -3,7 +3,7 @@ import ImageUploader from 'react-images-upload'
 
 import './index.css'
 
-const url = 'http://localhost:8000'
+const url = 'http://127.0.0.1:8000'
 
 class Try extends Component {
   constructor(props) {
@@ -38,7 +38,8 @@ class Try extends Component {
 
     const header = new Headers({
       'Access-Control-Allow-Origin':'*',
-      'Content-Type': 'multipart/form-data'
+      'Content-Type': 'multipart/form-data',
+      'Access-Control-Allow-Credentials': 'true',
     })
 
     const file = picture[0]
