@@ -47,7 +47,7 @@ class Try extends Component {
     formData.append('style', activeStyle);
 
     const sentData = {
-      method: POST,
+      method: 'POST',
       mode: 'cors',
       header: header,
       body: formData || '',
