@@ -9,6 +9,7 @@ class Output extends Component {
       stylesConfig,
       activeStyle,
       changeStyle,
+      responseUrl,
     } = this.props
 
     const styles = stylesConfig.map((style) => {
@@ -24,8 +25,7 @@ class Output extends Component {
 
     return (
       <div>
-        Output
-        <img src="" alt=""/>
+        <img src={responseUrl} alt="" />
         <div className="styles">
           {styles}
         </div>

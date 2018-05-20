@@ -49,6 +49,7 @@ class Main extends Component {
     this.state = {
       loading: false,
       activeStyle: stylesConfig[0].value,
+      responseUrl: '',
     }
 
     this.startLoading = this._startLoading.bind(this)
@@ -116,11 +117,15 @@ class Main extends Component {
 
     fetch(url, sentData)
       .then((response) => {
-        this.finishLoading()
         return response.json()
       })
       .then((json) => {
         console.log('json', json)
+        const { url } = json
+        this.setState({
+          responseUrl: url.slice(1),
+        })
+        this.finishLoading()
       })
       .catch((err) => {
         console.log('err', err)
@@ -132,6 +137,7 @@ class Main extends Component {
     const {
       loading,
       activeStyle,
+      responseUrl,
     } = this.state
 
     const spinner = loading
@@ -159,15 +165,13 @@ class Main extends Component {
           </div>
           <Try
             load={this.load}
-            startLoading={this.startLoading}
-            finishLoading={this.finishLoading}
-            activeStyle={activeStyle}
           />
         </div>
         <Output
           stylesConfig={stylesConfig}
           activeStyle={activeStyle}
           changeStyle={this.changeStyle}
+          responseUrl={`${url}`${responseUrl}}
         />
       </div>
     )
