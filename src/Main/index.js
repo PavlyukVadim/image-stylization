@@ -68,10 +68,15 @@ class Main extends Component {
   }
 
   _changeStyle(style) {
+    this.startLoading()
+
     this.setState({
       activeStyle: style,
-      loading: true,
     })
+
+    setTimeout(() => {
+      this.finishLoading()
+    }, 2000)
   }
 
   render() {
@@ -106,6 +111,7 @@ class Main extends Component {
           <Try
             startLoading={this.startLoading}
             finishLoading={this.finishLoading}
+            activeStyle={activeStyle}
           />
         </div>
         <Output

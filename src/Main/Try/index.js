@@ -3,11 +3,24 @@ import ImageUploader from 'react-images-upload'
 
 import './index.css'
 
+const url = 'localhost:8000'
+
 class Try extends Component {
   constructor(props) {
     super(props)
-    this.state = { pictures: [] }
+    this.state = {
+      pictures: [],
+      activeStyle: props.activeStyle,
+    }
     this.onDrop = this.onDrop.bind(this)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.activeStyle !== this.props.activeStyle) {
+      this.setState({
+        activeStyle: nextProps.activeStyle,
+      })
+    }
   }
 
   onDrop(picture) {
@@ -16,35 +29,28 @@ class Try extends Component {
       finishLoading,
     } = this.props
 
+    startLoading()
+
+    const { activeStyle } = this.state
     this.setState({
       pictures: this.state.pictures.concat(picture),
     })
 
     const file = picture[0]
     const formData = new FormData()
-    formData.append('photos[]', file, file.name)
+    formData.append('original_file', file, file.name)
+    formData.append('style', activeStyle);
 
-    // Set up the request.
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'handler.php', true)
-
-    // Set up a handler for when the request finishes.
-    xhr.onload = function () {
-      if (xhr.status === 200) {
-        alert('Upload')
-        finishLoading()
-      } else {
-        alert('An error occurred!')
-        console.log('formData', formData)
-        finishLoading()
-      }
-    }
-
-    startLoading()
-
-    setTimeout(() => {
-      xhr.send(formData)
-    }, 5000)
+    fetch(url, {
+      method: 'POST',
+      body: formData,
+    }).then(function (response) {
+      console.log('response', response)
+      finishLoading()
+    }).catch((err) => {
+      console.log('err', err)
+      finishLoading()
+    })
   }
 
   render() {
