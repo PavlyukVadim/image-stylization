@@ -3,7 +3,7 @@ import ImageUploader from 'react-images-upload'
 
 import './index.css'
 
-const url = 'localhost:8000'
+const url = 'http://localhost:8000'
 
 class Try extends Component {
   constructor(props) {
