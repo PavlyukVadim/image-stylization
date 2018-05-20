@@ -171,7 +171,7 @@ class Main extends Component {
           stylesConfig={stylesConfig}
           activeStyle={activeStyle}
           changeStyle={this.changeStyle}
-          responseUrl={`${url}`${responseUrl}}
+          responseUrl={`${url}${responseUrl}`}
         />
       </div>
     )
