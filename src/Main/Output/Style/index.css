@@ -1,0 +1,20 @@
+.style {
+  flex: 0 100%;
+  margin: 20px;
+}
+
+.style:hover {
+  cursor: pointer;
+
+}
+
+.style-img {
+  background-size: cover;
+  height: 200px;
+}
+
+.selected {
+  background-size: 64px 64px;
+  background-repeat: no-repeat;
+  background-position: center 45%;
+}
