@@ -25,6 +25,7 @@ class Output extends Component {
     return (
       <div>
         Output
+        <img src="" alt=""/>
         <div className="styles">
           {styles}
         </div>

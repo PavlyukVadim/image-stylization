@@ -41,6 +41,8 @@ const stylesConfig = [
   },
 ]
 
+const url = 'http://127.0.0.1:8000/'
+
 class Main extends Component {
   constructor(props) {
     super(props)
@@ -52,6 +54,7 @@ class Main extends Component {
     this.startLoading = this._startLoading.bind(this)
     this.finishLoading = this._finishLoading.bind(this)
     this.changeStyle = this._changeStyle.bind(this)
+    this.load = this._load.bind(this)
   }
 
   _startLoading() {
@@ -73,15 +76,56 @@ class Main extends Component {
   }
 
   _changeStyle(style) {
-    this.startLoading()
-
     this.setState({
       activeStyle: style,
+    }, () => {
+      this.load()
+    })
+  }
+
+  _load(newFile) {
+    const { activeStyle } = this.state
+
+    this.startLoading()
+    let file = newFile
+
+    if (newFile) {
+      this.setState({
+        file: newFile,
+      })
+    } else {
+      file = this.state.file
+    }
+
+    const header = new Headers({
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'multipart/form-data',
+      'Access-Control-Allow-Credentials': 'true',
     })
 
-    setTimeout(() => {
-      this.finishLoading()
-    }, 2000)
+    const formData = new FormData()
+    formData.append('original_file', file, file.name)
+    formData.append('style', activeStyle)
+
+    const sentData = {
+      method: 'POST',
+      mode: 'cors',
+      header: header,
+      body: formData || '',
+    }
+
+    fetch(url, sentData)
+      .then((response) => {
+        this.finishLoading()
+        return response.json()
+      })
+      .then((json) => {
+        console.log('json', json)
+      })
+      .catch((err) => {
+        console.log('err', err)
+        this.finishLoading()
+      })
   }
 
   render() {
@@ -114,6 +158,7 @@ class Main extends Component {
             </div>
           </div>
           <Try
+            load={this.load}
             startLoading={this.startLoading}
             finishLoading={this.finishLoading}
             activeStyle={activeStyle}
