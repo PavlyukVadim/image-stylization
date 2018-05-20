@@ -16,8 +16,8 @@ class Output extends Component {
         <Style
           key={style.name}
           {...style}
-          onClick={() => changeStyle(style.name)}
-          isActive={style.name === activeStyle}
+          onClick={() => changeStyle(style.value)}
+          isActive={style.value === activeStyle}
         />
       )
     })

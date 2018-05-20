@@ -17,22 +17,27 @@ const stylesConfig = [
   {
     name: 'La Muse',
     img: LaMuse,
+    value: 'la_muse',
   },
   {
     name: 'Rain Princess',
     img: RainPrincess,
+    value: 'rain_princess',
   },
   {
     name: 'The Scream',
     img: TheScream,
+    value: 'the_scream',
   },
   {
     name: 'Udnie',
     img: Udnie,
+    value: 'udnie',
   },
   {
     name: 'Wave',
     img: Wave,
+    value: 'wave',
   },
 ]
 
@@ -41,7 +46,7 @@ class Main extends Component {
     super(props)
     this.state = {
       loading: false,
-      activeStyle: stylesConfig[0].name,
+      activeStyle: stylesConfig[0].value,
     }
 
     this.startLoading = this._startLoading.bind(this)

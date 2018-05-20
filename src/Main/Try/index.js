@@ -37,7 +37,7 @@ class Try extends Component {
     })
 
     const header = new Headers({
-      'Access-Control-Allow-Origin':'*',
+      'Access-Control-Allow-Origin': '*',
       'Content-Type': 'multipart/form-data',
       'Access-Control-Allow-Credentials': 'true',
     })
