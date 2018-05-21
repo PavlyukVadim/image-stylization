@@ -27,7 +27,7 @@ const stylesConfig = [
   {
     name: 'The Scream',
     img: TheScream,
-    value: 'the_scream',
+    value: 'scream',
   },
   {
     name: 'Udnie',
