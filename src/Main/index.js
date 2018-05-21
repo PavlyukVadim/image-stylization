@@ -126,10 +126,6 @@ class Main extends Component {
           responseUrl: url.slice(1),
         })
         this.finishLoading()
-      })
-      .catch((err) => {
-        console.log('err', err)
-        this.finishLoading()
 
         const scrollTo = (scrollPosition, scrollDuration) => {
           let scrollStep = Math.abs(scrollPosition - window.scrollY) / (scrollDuration / 15)
@@ -148,6 +144,11 @@ class Main extends Component {
         }
 
         scrollTo(window.innerHeight, 500)
+      })
+      .catch((err) => {
+        console.log('err', err)
+        this.finishLoading()
+        alert('Error', err)
       })
   }
 
@@ -189,8 +190,8 @@ class Main extends Component {
           stylesConfig={stylesConfig}
           activeStyle={activeStyle}
           changeStyle={this.changeStyle}
-          responseUrl={LaMuse /*`${url}${responseUrl}`*/}
-          isHide={false/*!responseUrl*/}
+          responseUrl={`${url}${responseUrl}`}
+          isHide={!responseUrl}
         />
       </div>
     )

@@ -13,8 +13,6 @@ class Output extends Component {
       isHide,
     } = this.props
 
-    console.log('isHide', isHide)
-
     const outputStyle = {}
     if (isHide) {
       outputStyle.display = 'none'
@@ -32,7 +30,10 @@ class Output extends Component {
     })
 
     return (
-      <div style={outputStyle}>
+      <div
+        className="output"
+        style={outputStyle}
+      >
         <img src={responseUrl} alt="" />
         <div className="styles">
           {styles}

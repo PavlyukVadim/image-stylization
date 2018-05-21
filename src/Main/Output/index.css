@@ -1,3 +1,7 @@
+.output {
+  padding-top: 50px;
+}
+
 .styles {
   display: flex;
 }
