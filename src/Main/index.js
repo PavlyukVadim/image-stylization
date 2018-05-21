@@ -172,6 +172,7 @@ class Main extends Component {
           activeStyle={activeStyle}
           changeStyle={this.changeStyle}
           responseUrl={`${url}${responseUrl}`}
+          isHide={!responseUrl}
         />
       </div>
     )

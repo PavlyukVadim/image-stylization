@@ -10,7 +10,15 @@ class Output extends Component {
       activeStyle,
       changeStyle,
       responseUrl,
+      isHide,
     } = this.props
+
+    console.log('isHide', isHide)
+
+    const outputStyle = {}
+    if (isHide) {
+      outputStyle.display = 'none'
+    }
 
     const styles = stylesConfig.map((style) => {
       return (
@@ -24,7 +32,7 @@ class Output extends Component {
     })
 
     return (
-      <div>
+      <div style={outputStyle}>
         <img src={responseUrl} alt="" />
         <div className="styles">
           {styles}
