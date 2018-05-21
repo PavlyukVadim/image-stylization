@@ -130,6 +130,24 @@ class Main extends Component {
       .catch((err) => {
         console.log('err', err)
         this.finishLoading()
+
+        const scrollTo = (scrollPosition, scrollDuration) => {
+          let scrollStep = Math.abs(scrollPosition - window.scrollY) / (scrollDuration / 15)
+          const direction = scrollPosition > window.scrollY ? 1 : -1
+          scrollStep *= direction
+          const scrollInterval = setInterval(() => {
+            if (window.scrollY !== scrollPosition) {
+              window.scrollBy(0, scrollStep)
+            } else {
+              clearInterval(scrollInterval)
+            }
+          }, 15)
+          setTimeout(() => {
+            clearInterval(scrollInterval)
+          }, scrollDuration * 1.1)
+        }
+
+        scrollTo(window.innerHeight, 500)
       })
   }
 
@@ -171,8 +189,8 @@ class Main extends Component {
           stylesConfig={stylesConfig}
           activeStyle={activeStyle}
           changeStyle={this.changeStyle}
-          responseUrl={`${url}${responseUrl}`}
-          isHide={!responseUrl}
+          responseUrl={LaMuse /*`${url}${responseUrl}`*/}
+          isHide={false/*!responseUrl*/}
         />
       </div>
     )
